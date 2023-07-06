@@ -1,4 +1,5 @@
 import 'package:adv_basics/styled_text.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class BackgroundContainer extends StatelessWidget {
@@ -22,14 +23,20 @@ class BackgroundContainer extends StatelessWidget {
           const StyledText(),
           const SizedBox(height: 20),
           ElevatedButton(
-            onPressed: clickButton,
             style: ElevatedButton.styleFrom(
               backgroundColor: Colors.purple,
             ),
             child: const Text(
               "Start!",
             ),
+            onPressed: () {},
           ),
+          // CupertinoButton.filled(
+          //   child: const Text(
+          //     "Start!",
+          //   ),
+          //   onPressed: () {},
+          // ),
         ],
       ),
     );
