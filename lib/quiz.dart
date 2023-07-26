@@ -1,6 +1,8 @@
-import 'package:adv_basics/questions_screen.dart';
+import 'package:adv_basics/result_screen.dart';
 import 'package:flutter/material.dart';
 
+import 'package:adv_basics/data/questions.dart';
+import 'package:adv_basics/questions_screen.dart';
 import 'package:adv_basics/start_screen.dart';
 
 class Quiz extends StatefulWidget {
@@ -25,6 +27,7 @@ class _QuizState extends State<Quiz> {
   // }
 
   //Below is the 2nd way
+  List<String> selectedAnswer = [];
   var activeScreen = 'start-screen';
 
   //One way to render content conditionally(Using 'ternary' operator).
@@ -34,13 +37,28 @@ class _QuizState extends State<Quiz> {
     });
   }
 
+  void chooseAnswer(String answer) {
+    selectedAnswer.add(answer);
+
+    if (selectedAnswer.length == questions.length) {
+      setState(() {
+        // selectedAnswer = []; //Resetting to empty List for next Quiz Round.
+        activeScreen = 'result-screen';
+      });
+    }
+  }
+
   @override
   Widget build(context) {
     //3rd way of rendering the screen(Using 'if' condition).
     Widget screenWidget = StartScreen(switchScreen);
 
     if (activeScreen == 'questions-screen') {
-      screenWidget = const QuestionScreen();
+      screenWidget = QuestionScreen(onSelectAnswer: chooseAnswer);
+    }
+
+    if (activeScreen == 'result-screen') {
+      screenWidget = ResultScreen(chosenAnswer: selectedAnswer);
     }
 
     return MaterialApp(
