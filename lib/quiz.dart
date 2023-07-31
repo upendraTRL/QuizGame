@@ -48,6 +48,12 @@ class _QuizState extends State<Quiz> {
     }
   }
 
+  void restartQuiz() {
+    setState(() {
+      activeScreen = 'restart-screen';
+    });
+  }
+
   @override
   Widget build(context) {
     //3rd way of rendering the screen(Using 'if' condition).
@@ -58,7 +64,12 @@ class _QuizState extends State<Quiz> {
     }
 
     if (activeScreen == 'result-screen') {
-      screenWidget = ResultScreen(chosenAnswer: selectedAnswer);
+      screenWidget = ResultScreen(chosenAnswer: selectedAnswer, restartFunction: restartQuiz);
+    }
+
+    if (activeScreen == 'restart-screen') {
+      selectedAnswer = [];
+      screenWidget = StartScreen(switchScreen);
     }
 
     return MaterialApp(
