@@ -14,7 +14,7 @@ class ResultScreen extends StatelessWidget {
   final List<String> chosenAnswer;
   final void Function() restartFunction;
 
-  List<Map<String, Object>> getSummaryData() {
+  List<Map<String, Object>> get summaryData {
     //Here, value is type Object which can have any type of values.
     final List<Map<String, Object>> summary = [];
 
@@ -32,11 +32,12 @@ class ResultScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final summaryData = getSummaryData();
     final numTotalQues = questions.length;
-    final numCorrectQues = summaryData.where((data) {
-      return data['user_answer'] == data['correct_answer'];
-    }).length;
+    final numCorrectQues = summaryData
+        .where(
+          (data) => data['user_answer'] == data['correct_answer'],
+        )
+        .length;
 
     return SizedBox(
       width: double.infinity,
